@@ -6,4 +6,4 @@ from .models import Word
 class WordsModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Word
-        fields = '__all__'
+        fields = ['id', 'en', 'ru', 'learned', 'repeat', 'show_translate']

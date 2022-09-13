@@ -21,4 +21,4 @@ class Command(BaseCommand):
         words = load_from_json('en_words_translate')
 
         for w in words:
-            Word.objects.create(en=w['en'], ru=w['ru'])
+            Word.objects.create(en=w['en'], ru=w['ru'], learned=False, repeat=False, show_translate=False)
