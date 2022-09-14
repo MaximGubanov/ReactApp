@@ -1,4 +1,4 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
@@ -40,7 +40,7 @@ const wordsSlice = createSlice({
         error: null,
         // url: 'http://127.0.0.1:8000/api/words/?page=1',
         arrPages: [], // в этом массиве находятся номера страниц, которые были случ. сгенерированы
-        url: `http://194.61.0.120:8000/api/words/?page=${getRandomNumber()}`,
+        url: `http://194.61.0.120:8000/api/words/?page=${getRandomNumber()}`, // генерируем 1-ю страницу
     },
     reducers: {
         addWordToLearned (state, actions) {
@@ -69,25 +69,24 @@ const wordsSlice = createSlice({
         [fetchWords.fulfilled]: (state, actions) => {
             state.status = 'resolved'
             state.words = [...state.words, ...actions.payload.results]
-            // генерируем новую страницу и кладем в массив
+            // генерируем новую страницу
             const randPage = (loop = true) => {
 
                 while (loop) {
 
                     const num = getRandomNumber()
 
-                    if (state.arrPages.includes(num)) { 
+                    if (state.arrPages.includes(num)) { // делаем проверку на наличие страниц
                         continue
-                    } else {
-                        state.arrPages.push(num)
+                    } else {                            // если такой нет, то помещаем в массив страниц
+                        state.arrPages.push(num)        // и возвращаем номер страницы
                         loop = false
                         return num
                     }
                 }
             }
-            // забираем последний (новая страница всегда будет в конце) элемент из массива страниц
+
             state.url = `http://194.61.0.120:8000/api/words/?page=${randPage()}`
-            console.log(state.url)
         },
         [fetchWords.rejected]: (state, actions) => {},
     }

@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 
 const Nav = styled.nav`
@@ -13,7 +13,7 @@ const Navlist = styled.ul`
     font-size: 1rem;
     color: #7D71D8;
     gap: 1rem;
-    `;
+`;
 
 const ListItem = styled.li`
     a {

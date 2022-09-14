@@ -40,11 +40,9 @@ const modalSlice = createSlice({
         error: '',
     },
     reducers: {
-        openModal (state, actions) {
+        openModal (state) {
             state.isModalVisible = true
-            // console.log(actions.payload)
             fetchImage()
-            // console.log(state.imageURL)
         },
         closeModal (state) {
             state.isModalVisible = false

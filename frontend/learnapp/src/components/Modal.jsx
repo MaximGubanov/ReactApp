@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-
 import styled from 'styled-components'
+
 import { closeModal } from '../redux/modalSlice'
 import { Loader } from './Loader'
 
@@ -34,5 +34,5 @@ export const Modal = ({ isVisible = false, content }) => {
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }

@@ -1,7 +1,8 @@
-import { React} from 'react';
-import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import { filterSearch } from '../redux/wordsSlice';
+import { React} from 'react'
+import { useDispatch } from 'react-redux'
+import styled from 'styled-components'
+
+import { filterSearch } from '../redux/wordsSlice'
 
 
 const Input = styled.input`
