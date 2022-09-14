@@ -46,7 +46,7 @@ export const Statebar = () => {
 
     const getWords = () => {
         console.log(url)
-        dispatch(fetchWords('http://194.61.0.120:8080/api/words/'))
+        dispatch(fetchWords('http://194.61.0.120:8000/api/words/'))
     }
 
     return (
