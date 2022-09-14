@@ -3,6 +3,9 @@ import axios from 'axios'
 
 
 function getRandomNumber(min=1, max=222) {
+    // ф-я для генерации случайных страниц (max=222 - я знаю, что это макс. кол-во страниц, которое может отдать back)
+    // иначе при каждой перезагрузки front получает страницы в строгом порядке, рандомную выборку можно было сделать и
+    // на back`е, но весь упор на front сделан, поэтому тут и реализовал случайный порядок
     min = Math.ceil(min)
     max = Math.floor(max)
     return Math.floor(Math.random() * (max - min + 1)) + min
@@ -37,6 +40,7 @@ const wordsSlice = createSlice({
         error: null,
         // url: 'http://127.0.0.1:8000/api/words/?page=1',
         url: 'http://194.61.0.120:8000/api/words/?page=1',
+        arrPages: [], // в этом массиве находятся номера страниц, которые были случ. сгенерированы
     },
     reducers: {
         addWordToLearned (state, actions) {
@@ -65,8 +69,24 @@ const wordsSlice = createSlice({
         [fetchWords.fulfilled]: (state, actions) => {
             state.status = 'resolved'
             state.words = [...state.words, ...actions.payload.results]
-            state.url = actions.payload.next
-            state.url = `http://194.61.0.120:8000/api/words/?page=${getRandomNumber()}`
+            // генерируем новую страницу и кладем в массив
+            state.arrPages.push((loop = true) => {
+
+                while (loop) {
+
+                    const num = getRandomNumber()
+
+                    if (state.arrPages.includes(num)) { 
+                        console.log(state.arrPages)
+                        continue
+                    } else {
+                        loop = false
+                        return num
+                    }
+                }
+            })
+            // забираем последний (новая страница всегда будет в конце) элемент из массива страниц
+            state.url = `http://194.61.0.120:8000/api/words/?page=${state.arrPages.slice(-1)}`
         },
         [fetchWords.rejected]: (state, actions) => {},
     }
