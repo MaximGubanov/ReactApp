@@ -70,24 +70,23 @@ const wordsSlice = createSlice({
             state.status = 'resolved'
             state.words = [...state.words, ...actions.payload.results]
             // генерируем новую страницу и кладем в массив
-            state.arrPages.push((loop = true) => {
+            const randPage = (loop = true) => {
 
                 while (loop) {
 
                     const num = getRandomNumber()
 
                     if (state.arrPages.includes(num)) { 
-                        console.log(state.arrPages)
                         continue
                     } else {
+                        state.arrPages.push(num)
                         loop = false
                         return num
                     }
                 }
-            })
-            const page = state.arrPages[state.arrPages.length - 1]
+            }
             // забираем последний (новая страница всегда будет в конце) элемент из массива страниц
-            state.url = `http://194.61.0.120:8000/api/words/?page=${page}`
+            state.url = `http://194.61.0.120:8000/api/words/?page=${randPage()}`
             console.log(state.url)
         },
         [fetchWords.rejected]: (state, actions) => {},
