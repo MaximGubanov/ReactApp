@@ -30,7 +30,7 @@ const wordsSlice = createSlice({
         status: null,
         error: null,
         // url: 'http://127.0.0.1:8000/api/words/?page=1',
-        url: 'http://194.61.0.120:8000/api/words/?page=1',
+        url: 'http://backend:8000/api/words/?page=1',
     },
     reducers: {
         addWordToLearned (state, actions) {
