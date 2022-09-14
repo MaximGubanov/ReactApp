@@ -6,7 +6,6 @@ export const fetchImage = createAsyncThunk(
     'modal/fetchImage',
     async function (en) {
         try {
-            console.log(en)
             const url = 'https://www.flickr.com/services/rest/'
             const apiKey = '3a2f40d7f1dd5e73b71e41f70ae4d648'
             const imageURL = await axios.get(`${url}?method=flickr.photos.search&api_key=${apiKey}&tags=${en}&text=${en}&format=json&nojsoncallback=1`)
@@ -24,7 +23,6 @@ export const fetchImage = createAsyncThunk(
                     console.log(error)
                     return error
                 })
-            console.log(imageURL)
             return imageURL
         }
         catch(err) {
