@@ -39,8 +39,8 @@ const wordsSlice = createSlice({
         status: null,
         error: null,
         // url: 'http://127.0.0.1:8000/api/words/?page=1',
-        url: 'http://194.61.0.120:8000/api/words/?page=1',
         arrPages: [], // в этом массиве находятся номера страниц, которые были случ. сгенерированы
+        url: `http://194.61.0.120:8000/api/words/?page=${getRandomNumber()}`,
     },
     reducers: {
         addWordToLearned (state, actions) {
@@ -86,7 +86,7 @@ const wordsSlice = createSlice({
                 }
             })
             // забираем последний (новая страница всегда будет в конце) элемент из массива страниц
-            state.url = `http://194.61.0.120:8000/api/words/?page=${state.arrPages.slice(-1)}`
+            state.url = `http://194.61.0.120:8000/api/words/?page=${state.arrPages[state.arrPages.length - 1]}`
         },
         [fetchWords.rejected]: (state, actions) => {},
     }
