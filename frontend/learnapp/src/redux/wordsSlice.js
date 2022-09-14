@@ -64,6 +64,6 @@ const wordsSlice = createSlice({
     }
 })
 
-export const { addWordToLearned, addWordToRepetition, filterSearch } = wordsSlice.actions;
+export const { addWordToLearned, addWordToRepetition, filterSearch } = wordsSlice.actions
 
-export default wordsSlice.reducer;
+export default wordsSlice.reducer

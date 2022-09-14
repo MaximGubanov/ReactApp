@@ -1,14 +1,15 @@
 /*Обнуление*/
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400&family=Roboto:wght@100;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;1,300;1,800&family=Nunito+Sans:wght@200;400&family=Roboto:wght@100;300;400&display=swap');
 
 *{
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.2rem;
+	color: #7D71D8;
 	padding: 0;
 	margin: 0;
 	border: 0;
-	font-size: 1.5rem;
-	font-family: 'Nunito', 'sans-serif';
-	color: #7D71D8;
 }
 *,*:before,*:after{
 	-moz-box-sizing: border-box;
@@ -48,3 +49,71 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	pointer-events: none;
 	background: rgb(164, 164, 164);
 }
+
+/*-----------------Модальное окно--------------------*/
+.modal {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: 9999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.25);
+	animation-name: appear;
+	animation-duration: 300ms;
+}
+
+.modal-dialog {
+	width: 100%;
+	max-width: 550px;
+	background: white;
+	position: relative;
+	margin: 0 20px;
+	max-height: calc(100vh - 40px);
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		-webkit-animation-name: animatetop;
+		-webkit-animation-duration: 0.4s;
+	animation-name: slide-in;
+	animation-duration: 0.5s;
+  }
+
+  .modal-close {
+	cursor: pointer;
+	padding: 1rem;
+	margin: -1rem -1rem -1rem auto;
+  }
+  
+  .modal-body {
+	overflow: auto;
+  }
+  
+  .modal-content {
+	text-align: center;
+	padding: 1rem;
+  }
+
+  @keyframes appear {
+	from {
+	  opacity: 0;
+	}
+	to {
+	  opacity: 1;
+	}
+  }
+  
+  @keyframes slide-in {
+	from {
+	  transform: translateY(-150px);
+	}
+	to {
+	  transform: translateY(0);
+	}
+  }

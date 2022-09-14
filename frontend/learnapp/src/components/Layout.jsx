@@ -1,10 +1,12 @@
+import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Header } from './Header'
-import { SideBar } from './SideBar'
+import { Statebar } from './StateBar'
 import { Footer } from './Footer'
 import { Container } from './Container'
+import { Modal } from '../components/Modal'
 
 
 const Main = styled.main`
@@ -12,36 +14,35 @@ const Main = styled.main`
 `;
 
 const Section = styled.section`
-    display: grid;
-    grid-template-columns: auto 300px;
+    display: flex;
+    justify-content: center;
     padding: 2rem 0;
-    /* @media (min-width: 768px) {
-        grid-template-rows: 40px auto;
-        grid-template-columns: repeat(4, 1fr);
-    } */
+
+    @media (max-width: 1024px) {
+    }
 `;
 
 const Content = styled.div`
-    padding-right: 2rem;
+    padding: 2rem 0;
 `;
 
-const SideBarWrapper = styled.div`
-
-`;
 
 const Layout = () => {
+
+    const isVisible = useSelector(state => state.modal.isModalVisible)
+    const promptImage = useSelector(state => state.modal.imageURL)
+
     return (
         <>
+            <Modal isVisible={isVisible} content={promptImage} />
             <Header />
             <Main>
                 <Container>
+                    <Statebar />
                     <Section>
                         <Content>
                             <Outlet />
                         </Content>
-                        <SideBarWrapper>
-                            <SideBar />
-                        </SideBarWrapper>
                     </Section>
                 </Container>
             </Main>
