@@ -45,7 +45,8 @@ export const Statebar = () => {
     const words = useSelector(state => state.words.words)
 
     const getWords = () => {
-        dispatch(fetchWords(url))
+        console.log(url)
+        dispatch(fetchWords('http://194.61.0.120:8080/api/words/'))
     }
 
     return (
