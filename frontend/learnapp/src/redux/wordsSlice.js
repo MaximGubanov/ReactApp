@@ -85,8 +85,10 @@ const wordsSlice = createSlice({
                     }
                 }
             })
+            const page = state.arrPages[state.arrPages.length - 1]
             // забираем последний (новая страница всегда будет в конце) элемент из массива страниц
-            state.url = `http://194.61.0.120:8000/api/words/?page=${state.arrPages[state.arrPages.length - 1]}`
+            state.url = `http://194.61.0.120:8000/api/words/?page=${page}`
+            console.log(state.url)
         },
         [fetchWords.rejected]: (state, actions) => {},
     }
