@@ -2,10 +2,15 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
+function getRandomNumber(min=1, max=1700) {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
 export const fetchWords = createAsyncThunk(
     'words/fetchWords',
     async function (url) {
-        console.log('ЗАПРС', url)
         try {
             const data = await axios.get(url)
                 .then(response => response.data)
@@ -31,7 +36,7 @@ const wordsSlice = createSlice({
         status: null,
         error: null,
         // url: 'http://127.0.0.1:8000/api/words/?page=1',
-        url: 'http://194.61.0.120:8080/api/words/?page=1',
+        url: 'http://194.61.0.120:8000/api/words/?page=1',
     },
     reducers: {
         addWordToLearned (state, actions) {
@@ -61,8 +66,7 @@ const wordsSlice = createSlice({
             state.status = 'resolved'
             state.words = [...state.words, ...actions.payload.results]
             state.url = actions.payload.next
-            console.log('ACTIONS', actions.payload)
-            console.log('URL', state.url)
+            state.url = `http://194.61.0.120:8000/api/words/?page=${getRandomNumber()}`
         },
         [fetchWords.rejected]: (state, actions) => {},
     }
