@@ -132,14 +132,14 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost",
-    "http://localhost:80",
-    "http://localhost:8080",
-    "http://localhost:3000",
-    "http://194.61.0.120",
-    "http://194.61.0.120:8000",
-    "http://194.61.0.120:8080"
-    "https://194.61.0.120",
-    "https://194.61.0.120:8000",
-    "https://194.61.0.120:8080",
+    'http://localhost',
+    'http://localhost:80',
+    'http://localhost:8080',
+    'http://localhost:3000',
+    'http://194.61.0.120',
+    # "http://194.61.0.120:8000",
+    # "http://194.61.0.120:8080"
+    # "https://194.61.0.120",
+    # "https://194.61.0.120:8000",
+    # "https://194.61.0.120:8080",
 ]
