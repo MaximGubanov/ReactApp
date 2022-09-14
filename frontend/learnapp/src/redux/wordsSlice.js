@@ -7,6 +7,7 @@ export const fetchWords = createAsyncThunk(
     async function (url) {
         try {
             const data = await axios.get(url)
+                console.log('ЗАПРС', url)
                 .then(response => response.data)
                 .catch(error => {
                     console.log(error)
