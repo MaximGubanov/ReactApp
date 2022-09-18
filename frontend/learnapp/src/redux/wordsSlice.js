@@ -42,7 +42,7 @@ const wordsSlice = createSlice({
         error: null,
         // url: 'http://127.0.0.1:8000/api/words/?page=1',
         arrPages: [], // в этом массиве находятся номера страниц, которые были случ. сгенерированы, для запросов
-        url: `http://194.64.0.120:8000/api/words/?page=${getRandomNumber()}`, // генерируем 1-ю страницу
+        url: `http://194.61.0.120:8000/api/words/?page=${getRandomNumber()}`, // генерируем 1-ю страницу
     },
     reducers: {
         addWordToLearned (state, actions) {
