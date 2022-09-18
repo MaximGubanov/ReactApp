@@ -45,9 +45,14 @@ img{vertical-align: top;}
 h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 /*--------------------*/
 
-.done span {
+.locked span {
 	pointer-events: none;
 	background: rgb(164, 164, 164);
+}
+
+.active {
+	background-color: #3d2bc6;
+	color: white;
 }
 
 /*-----------------Модальное окно--------------------*/

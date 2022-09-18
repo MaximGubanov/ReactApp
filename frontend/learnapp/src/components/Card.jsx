@@ -51,7 +51,7 @@ export const Card = ({card}) => {
     }
 
     return (
-        <CardBody className={ card.learned? 'done' : '' }>
+        <CardBody className={ card.learned ? 'locked' : '' }>
             <Word>{ card.show_translate ? `${card.en} - ${card.ru}` : card.en }</Word>
             <ul style={{ padding: '2rem 0', gap: '1rem' }}>
             

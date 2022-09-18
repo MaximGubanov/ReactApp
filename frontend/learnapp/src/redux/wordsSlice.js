@@ -32,18 +32,21 @@ export const fetchWords = createAsyncThunk(
 const wordsSlice = createSlice({
     name: 'words',
     initialState: {
-        words: [],
-        filterSearch: '',
-        totalLearned: 0,
-        forRepetition: 0,
+        words: [],        // Массив загруженных слов, с каждой загрузкой новые слова добавляются в этот 'words'
+        currentPage: {start: 0, end: 8},  // Дефолтовое значение срез массива оотфильтрованного 'words', (words.slice(start, end))
+                                          // для пагинации.
+        filterSearch: '', // Фильтр поиска по массиву 'words'
+        totalLearned: 0,  // Счётчик изученных слов
+        forRepetition: 0, // Счётчик слов для повторения
         status: null,
         error: null,
         // url: 'http://127.0.0.1:8000/api/words/?page=1',
-        arrPages: [], // в этом массиве находятся номера страниц, которые были случ. сгенерированы
-        url: `http://194.61.0.120:8000/api/words/?page=${getRandomNumber()}`, // генерируем 1-ю страницу
+        arrPages: [], // в этом массиве находятся номера страниц, которые были случ. сгенерированы, для запросов
+        url: `http://194.64.0.120:8000/api/words/?page=${getRandomNumber()}`, // генерируем 1-ю страницу
     },
     reducers: {
         addWordToLearned (state, actions) {
+            // редюсер для добавления слов в 'Изученные'
             const card = state.words.find(word => word.id === actions.payload)
             card.learned = true
             card.repeat = false
@@ -52,13 +55,19 @@ const wordsSlice = createSlice({
             state.totalLearned = state.words.filter(word => word.learned).length
         },
         addWordToRepetition (state, actions) {
+            // редюсер для добавления слов в 'На повторение'
             const card = state.words.find(word => word.id === actions.payload)
             card.repeat = !card.repeat
             card.show_translate = !card.show_translate
             state.forRepetition = state.words.filter(word => word.repeat === true).length
         },
         filterSearch (state, actions) {
+            // Фильтр для поиска
             state.filterSearch = actions.payload.trim().toLowerCase()
+        },
+        setCurrentPage (state, actions) {
+            // редюсер настройки среза для пагинации (см. Pagination.jsx ф-я setSlice())
+            state.currentPage = actions.payload
         },
     },
     extraReducers: {
@@ -69,14 +78,15 @@ const wordsSlice = createSlice({
         [fetchWords.fulfilled]: (state, actions) => {
             state.status = 'resolved'
             state.words = [...state.words, ...actions.payload.results]
-            // генерируем новую страницу
-            const randPage = (loop = true) => {
+            // Генерируем новую страницу... Пример: http://127.0.0.1:8000/api/words/?page=23
+            // параметр '?page=' будет всегда случайный, но не будет повторяться, проверка ниже...
+            const getPage = (loop = true) => {
 
                 while (loop) {
 
-                    const num = getRandomNumber()
+                    const num = getRandomNumber()       // генерация случайного числа
 
-                    if (state.arrPages.includes(num)) { // делаем проверку на наличие страниц
+                    if (state.arrPages.includes(num)) { // делаем проверку на наличие существующих страниц
                         continue
                     } else {                            // если такой нет, то помещаем в массив страниц
                         state.arrPages.push(num)        // и возвращаем номер страницы
@@ -86,12 +96,12 @@ const wordsSlice = createSlice({
                 }
             }
 
-            state.url = `http://194.61.0.120:8000/api/words/?page=${randPage()}`
+            state.url = `http://194.61.0.120:8000/api/words/?page=${getPage()}` // формируем запрос с рандомным параметром '?page='
         },
         [fetchWords.rejected]: (state, actions) => {},
     }
 })
 
-export const { addWordToLearned, addWordToRepetition, filterSearch } = wordsSlice.actions
+export const { addWordToLearned, addWordToRepetition, filterSearch, setCurrentPage } = wordsSlice.actions
 
 export default wordsSlice.reducer

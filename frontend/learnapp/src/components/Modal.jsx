@@ -12,7 +12,7 @@ const ImagePrompt = styled.img`
 `;
 
 export const Modal = ({ isVisible = false, content }) => {
-    
+    // Модальное окно для отображения подсказки в виде изображения
     const dispatch = useDispatch()
   
     const close = () => {
